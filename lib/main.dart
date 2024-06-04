@@ -5,11 +5,11 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((value) {
-    runApp(MyApp());
-  });
+  // WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
+  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+  //     .then((value) {
+  // });
 
   //runApp(const MyApp());
 }

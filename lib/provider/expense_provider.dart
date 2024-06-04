@@ -18,7 +18,7 @@ class ExpenseProvider extends ChangeNotifier {
   double finalAmountFuels = 0.0;
   double finalAmountMisc = 0.0;
 
-  double threshold = 10;
+  double threshold = 0;
 
   void addToList(ExpenseData expense) {
     listOfCard.add(expense);
@@ -86,6 +86,7 @@ class ExpenseProvider extends ChangeNotifier {
   }
 
   void undoDelete(ExpenseData expenseData) {
+    print('Called');
     listOfCard.add(expenseData);
     threshold += int.parse(expenseData.amount);
     switch (expenseData.whichTitle!) {

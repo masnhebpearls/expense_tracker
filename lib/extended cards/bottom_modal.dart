@@ -84,11 +84,11 @@ class _ExtendedModalSheetState extends State<ExtendedModalSheet> {
           },
           child: Container(
             width: width,
-            height: height * 0.6,
+            height: height*0.6,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topRight: Radius.circular(width * 0.15),
-                    topLeft: Radius.circular(width * 0.15)),
+                    topLeft: Radius.circular(width * 0.15),),
                 color: const Color(0xffCADEFC)),
             child: SingleChildScrollView(
               child: Column(
@@ -102,7 +102,7 @@ class _ExtendedModalSheetState extends State<ExtendedModalSheet> {
                           height: height * 0.035,
                         ),
                         SizedBox(
-                          width: width * 0.85,
+                          width:width * 0.85,
                           child: TextFormField(
                             controller: _titleController,
                             validator: (val) {

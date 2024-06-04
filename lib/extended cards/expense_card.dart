@@ -36,6 +36,8 @@ class _ExtendedExpenseCardState extends State<ExtendedExpenseCard> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Consumer<ExpenseProvider>(
 
   builder: (context,expenseProvider,state) {
@@ -44,8 +46,8 @@ class _ExtendedExpenseCardState extends State<ExtendedExpenseCard> {
         top: MediaQuery.of(context).size.height*0.025
       ),
       child: Container(
-        width: MediaQuery.of(context).size.width*0.9,
-        height: MediaQuery.of(context).size.height*0.125,
+        width: height>width?width*0.9:width*0.5,
+        height: height> width ?height*0.125: height*0.225,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(MediaQuery.of(context).size.width*0.035),
           color: const Color(0xffe1d4f9)
@@ -54,26 +56,26 @@ class _ExtendedExpenseCardState extends State<ExtendedExpenseCard> {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width*0.05
+              left: height> width? width*0.05: width*0.025
             ),
             child: SizedBox(
-              width: MediaQuery.of(context).size.width*0.435,
+              width: height> width? width*0.435: width*0.25,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(widget.title,
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 22
+                    fontSize: height > width ? 22 : 26
                   ),),
                   Row(
                     children: [
                       const Icon(Icons.currency_rupee, size: 16,),
 
                       Text(widget.amount.toString(),
-                      style: const TextStyle(
-                        fontSize: 18,
+                      style:  TextStyle(
+                        fontSize: height > width ? 18 : 22,
                           fontWeight: FontWeight.w500,
 
                           color: Colors.black

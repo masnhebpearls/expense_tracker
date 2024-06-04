@@ -29,42 +29,38 @@ class _ExtendedBarGraphState extends State<ExtendedBarGraph> {
       builder: (context, expenseProvider, state) {
         return Padding(
           padding: EdgeInsets.fromLTRB(
-            width < height ? width * 0.035 : width * 0.01,
-            width < height ? height * 0.0125 : height * 0.02,
+            height > width ? width * 0.035 : width * 0.01,
+            height > width ? height * 0.0125 : height * 0.02,
             0,
             0,
           ),
           child: SizedBox(
-            width: width < height ? width * 0.175 : width * 0.075,
-            height: width < height ? height * 0.275 : height * 0.525,
+            width: height > width ? width * 0.175 : width * 0.075,
+            height: height > width ? height * 0.275 : height * 0.7,
             child: Column(
-              mainAxisAlignment: width < height
-                  ? MainAxisAlignment.end
-                  : MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                expenseProvider.getSum(widget.category).toInt() !=0 ? Center(
-                  child: Text('Rs. ${expenseProvider.getSum(widget.category).toInt().toString()}',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Color(0xff424874)
-                  ),
-                  ),
-                ): const SizedBox(),
+                expenseProvider.getSum(widget.category).toInt() != 0
+                    ? Center(
+                        child: Text(
+                          'Rs. ${expenseProvider.getSum(widget.category).toInt().toString()}',
+                          style: const TextStyle(
+                              fontSize: 16, color: Color(0xff424874)),
+                        ),
+                      )
+                    : const SizedBox(),
                 Container(
-                  height: MediaQuery.of(context).size.height *
-                      0.16 *
-                      (expenseProvider.getSum(widget.category) /
-                          expenseProvider.threshold),
+                  height: height > width ? height*0.16*(expenseProvider.getSum(widget.category) / expenseProvider.threshold): height*0.475*(expenseProvider.getSum(widget.category) / expenseProvider.threshold),
                   width: MediaQuery.of(context).size.width * 0.175,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(width < height
+                        topLeft: Radius.circular(height > width
                             ? width *
                                 0.035 *
                                 (expenseProvider.getSum(widget.category) /
                                     expenseProvider.threshold)
                             : width *
-                                0.01 *
+                                0.025 *
                                 (expenseProvider.getSum(widget.category) /
                                     expenseProvider.threshold)),
                         topRight: Radius.circular(width < height
@@ -73,23 +69,16 @@ class _ExtendedBarGraphState extends State<ExtendedBarGraph> {
                                 (expenseProvider.getSum(widget.category) /
                                     expenseProvider.threshold)
                             : width *
-                                0.01 *
+                                0.025 *
                                 (expenseProvider.getSum(widget.category) /
                                     expenseProvider.threshold)),
                       ),
                       color: const Color(0xff9572d4)),
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      0,
-                      width < height ? height * 0.025 : height * 0.35,
-                      0,
-                      width < height ? height * 0.025 : height * 0.35),
-                  child: Icon(
-                    widget.icon,
-                    size: 32,
-                    color: const Color(0xff9572d4),
-                  ),
+                Icon(
+                  widget.icon,
+                  size: 32,
+                  color: const Color(0xff9572d4),
                 )
               ],
             ),
