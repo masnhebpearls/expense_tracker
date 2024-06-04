@@ -95,7 +95,7 @@ class _ExtendedModalSheetState extends State<ExtendedModalSheet> {
                 color: const Color(0xffCADEFC)),
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Form(
                     key: _formKey,

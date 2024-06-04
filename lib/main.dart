@@ -1,8 +1,7 @@
 import 'package:expense_tracker/provider/expense_provider.dart';
-import 'package:expense_tracker/router/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'auto router/routes.dart';
 
 void main() {
   // WidgetsFlutterBinding.ensureInitialized();

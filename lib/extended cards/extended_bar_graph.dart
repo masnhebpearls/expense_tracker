@@ -50,7 +50,7 @@ class _ExtendedBarGraphState extends State<ExtendedBarGraph> {
                       )
                     : const SizedBox(),
                 Container(
-                  height: height > width ? height*0.16*(expenseProvider.getSum(widget.category) / expenseProvider.threshold): height*0.475*(expenseProvider.getSum(widget.category) / expenseProvider.threshold),
+                  height: height > width ? height*0.2*(expenseProvider.getSum(widget.category) / expenseProvider.threshold): height*0.475*(expenseProvider.getSum(widget.category) / expenseProvider.threshold),
                   width: MediaQuery.of(context).size.width * 0.175,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
