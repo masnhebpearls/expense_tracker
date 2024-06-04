@@ -86,7 +86,6 @@ class ExpenseProvider extends ChangeNotifier {
   }
 
   void undoDelete(ExpenseData expenseData) {
-    print('Called');
     listOfCard.add(expenseData);
     threshold += int.parse(expenseData.amount);
     switch (expenseData.whichTitle!) {
