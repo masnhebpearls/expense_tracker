@@ -14,7 +14,6 @@ class ExtendedModalSheet extends StatefulWidget {
 }
 
 class _ExtendedModalSheetState extends State<ExtendedModalSheet> {
-
   String getMonth(int month) {
     switch (month) {
       case 1:
@@ -45,6 +44,7 @@ class _ExtendedModalSheetState extends State<ExtendedModalSheet> {
         return "null";
     }
   }
+
   List<String> dropItem = ["General", "Foods", "Fuels", "Misc"];
   tittle abc = tittle.General;
 
@@ -84,11 +84,14 @@ class _ExtendedModalSheetState extends State<ExtendedModalSheet> {
           },
           child: Container(
             width: width,
-            height: height*0.6,
+            height: height > width ? height * 0.6 : height * 0.95,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(width * 0.15),
-                    topLeft: Radius.circular(width * 0.15),),
+                  topRight: Radius.circular(
+                      height > width ? width * 0.15 : width * 0.025),
+                  topLeft: Radius.circular(
+                      height > width ? width * 0.15 : width * 0.025),
+                ),
                 color: const Color(0xffCADEFC)),
             child: SingleChildScrollView(
               child: Column(
@@ -102,7 +105,7 @@ class _ExtendedModalSheetState extends State<ExtendedModalSheet> {
                           height: height * 0.035,
                         ),
                         SizedBox(
-                          width:width * 0.85,
+                          width: height > width ? width * 0.85: width*0.6,
                           child: TextFormField(
                             controller: _titleController,
                             validator: (val) {
@@ -113,7 +116,7 @@ class _ExtendedModalSheetState extends State<ExtendedModalSheet> {
                             },
                             style: const TextStyle(
                                 color: Color(0xff424874), fontSize: 22),
-                            decoration:  InputDecoration(
+                            decoration: InputDecoration(
                               prefixIcon: const Icon(
                                 Icons.title,
                                 size: 38,
@@ -128,8 +131,9 @@ class _ExtendedModalSheetState extends State<ExtendedModalSheet> {
                               ),
                               contentPadding: const EdgeInsets.all(20),
                               enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(width*0.05),
-                                  borderSide:const BorderSide(
+                                  borderRadius:
+                                      BorderRadius.circular(width * 0.05),
+                                  borderSide: const BorderSide(
                                       width: 4, color: Color(0xff424874))),
                             ),
                             onChanged: (String? value) {
@@ -140,108 +144,117 @@ class _ExtendedModalSheetState extends State<ExtendedModalSheet> {
                           ),
                         ),
                         SizedBox(
-                          height: height * 0.0125,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            SizedBox(
-                              width: width * 0.075,
-                            ),
-                            SizedBox(
-                              width: width * 0.4,
-                              // height: MediaQuery.of(context).size.height*0.1,
-                              child: TextFormField(
-                                validator: (val) {
-                                  if (val!.isEmpty) {
-                                    return "enter amount";
-                                  }
-                                  if (isAlpha(val)) {
-                                    return "numeric values only";
-                                  }
-                                  return null;
-                                },
-                                keyboardType: TextInputType.number,
-                                controller: _amountController,
-                                decoration: InputDecoration(
-                                  prefixIcon: const Icon(
-                                    Icons.currency_rupee,
-                                    size: 38,
-                                    color: Color(0xff424874),
-                                  ),
-                                  label: const Text(
-                                    "Amount",
-                                    style: TextStyle(
-                                      color: Color(0xff424874),
-                                      fontSize: 22,
-                                    ),
-                                  ),
-                                  contentPadding: const EdgeInsets.all(16),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(width*0.05),
-                                      borderSide: const BorderSide(
-                                          width: 4, color: Color(0xff424874))),
-                                ),
-                                onChanged: (String? value) {
-                                  setState(() {
-                                    numberInTextField = value!;
-                                  });
-                                },
-                              ),
-                            ),
-                            const Spacer(),
-                            SizedBox(
-                              // width: width * 0.25,
-                              height: height * 0.1,
-                              child: Center(
-                                child: Text(
-                                  selectedDateString,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w800,
-                                      textBaseline: TextBaseline.alphabetic,
-                                      fontSize: 20,
-                                      color: Color(0xff424874)),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () async {
-                                DateTime? date = await showDatePicker(
-                                  context: context,
-                                  firstDate: DateTime(
-                                      DateTime.now().year,
-                                      DateTime.now().month - 1,
-                                      DateTime.now().day),
-                                  lastDate: DateTime(
-                                      DateTime.now().year,
-                                      DateTime.now().month + 1,
-                                      DateTime.now().day),
-                                );
-                                setState(() {
-                                  selectedDateString =
-                                      formatDate(date!, [yy, '-', MM, '-', d]);
-                                });
-                              },
-                              icon: const Icon(
-                                Icons.calendar_today,
-                                color: Color(0xff424874),
-                                size: 32,
-                              ),
-                            ),
-                            SizedBox(
-                              width: width * 0.075,
-                            ),
-                          ],
+                          height: height > width ? height * 0.0125: height*0.05,
                         ),
                         SizedBox(
-                          height: height * 0.0125,
+                          width: width*0.85,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              SizedBox(
+                                width: height> width ? 0:width * 0.075,
+                              ),
+                              SizedBox(
+                                width: height > width ? width * 0.4: width*0.3,
+                                // height: MediaQuery.of(context).size.height*0.1,
+                                child: TextFormField(
+                                  validator: (val) {
+                                    if (val!.isEmpty) {
+                                      return "enter amount";
+                                    }
+                                    if (isAlpha(val)) {
+                                      return "numeric values only";
+                                    }
+                                    return null;
+                                  },
+                                  keyboardType: TextInputType.number,
+                                  controller: _amountController,
+                                  decoration: InputDecoration(
+                                    prefixIcon: const Icon(
+                                      Icons.currency_rupee,
+                                      size: 38,
+                                      color: Color(0xff424874),
+                                    ),
+                                    label: const Text(
+                                      "Amount",
+                                      style: TextStyle(
+                                        color: Color(0xff424874),
+                                        fontSize: 22,
+                                      ),
+                                    ),
+                                    contentPadding: const EdgeInsets.all(16),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(width * 0.05),
+                                        borderSide: const BorderSide(
+                                            width: 4, color: Color(0xff424874))),
+                                  ),
+                                  onChanged: (String? value) {
+                                    setState(() {
+                                      numberInTextField = value!;
+                                    });
+                                  },
+                                ),
+                              ),
+                              const Spacer(),
+                              SizedBox(
+                                // width: width * 0.25,
+                                height: height * 0.1,
+                                child: Center(
+                                  child: Text(
+                                    selectedDateString,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w800,
+                                        textBaseline: TextBaseline.alphabetic,
+                                        fontSize: 20,
+                                        color: Color(0xff424874)),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () async {
+                                  DateTime? date = await showDatePicker(
+                                    context: context,
+                                    firstDate: DateTime(
+                                        DateTime.now().year,
+                                        DateTime.now().month - 1,
+                                        DateTime.now().day),
+                                    lastDate: DateTime(
+                                        DateTime.now().year,
+                                        DateTime.now().month + 1,
+                                        DateTime.now().day),
+                                  );
+                                  setState(() {
+                                    selectedDateString =
+                                        formatDate(date!, [yy, '-', MM, '-', d]);
+                                  });
+                                },
+                                icon: const Icon(
+                                  Icons.calendar_today,
+                                  color: Color(0xff424874),
+                                  size: 32,
+                                ),
+                              ),
+                              SizedBox(
+                                width: width * 0.075,
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: height > width ? height * 0.0125: height*0.05,
                         ),
                         SizedBox(
                           width: width * 0.85,
                           height: height * 0.1,
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
+                              SizedBox(
+                                width: height> width ? 0:width * 0.075,
+                              ),
+
                               const Text(
                                 "Select category :",
                                 style: TextStyle(
@@ -250,7 +263,9 @@ class _ExtendedModalSheetState extends State<ExtendedModalSheet> {
                                     fontSize: 26,
                                     color: Color(0xff424874)),
                               ),
-                              const Spacer(),
+                              height > width ? const Spacer(): SizedBox(
+                                width: width*0.225,
+                              ),
                               DropdownButton(
                                   value: dropDownValue,
                                   items: [
@@ -328,70 +343,77 @@ class _ExtendedModalSheetState extends State<ExtendedModalSheet> {
                             ],
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Spacer(),
-                            InkWell(
+                        SizedBox(
+                          height: height > width ? height * 0.0125: height*0.05,
+                        ),
+                        SizedBox(
+                          width: width * 0.85,
+                          height: height * 0.1,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const Spacer(),
+                              InkWell(
+                                  onTap: () {
+                                    AutoRouter.of(context).maybePop();
+                                  },
+                                  child: Container(
+                                    height: height > width ? height * 0.05: height*0.1,
+                                    width: height > width ? width * 0.3: width*0.2,
+                                    decoration: BoxDecoration(
+                                        color: const Color(0xff4D869C),
+                                        borderRadius:
+                                            BorderRadius.circular(width * 0.075)),
+                                    child: const Center(
+                                      child: Text(
+                                        "Cancel",
+                                        style: TextStyle(
+                                            color: Color(0xffCDE8E5),
+                                            fontWeight: FontWeight.w800,
+                                            fontSize: 22),
+                                      ),
+                                    ),
+                                  )),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.05,
+                              ),
+                              InkWell(
                                 onTap: () {
-                                  AutoRouter.of(context).maybePop();
+                                  if (_formKey.currentState!.validate()) {
+                                    expenseProvider.addToList(
+                                      ExpenseData(
+                                          title: textInTextField,
+                                          amount: numberInTextField,
+                                          date: selectedDateString,
+                                          whichTitle: abc,
+                                          uniqueKey: DateTime.now()),
+                                    );
+                                    AutoRouter.of(context).maybePop();
+                                  }
                                 },
                                 child: Container(
-                                  height: height * 0.05,
-                                  width: width * 0.3,
+                                    height: height > width ? height * 0.05: height*0.1,
+                                    width: height > width ? width * 0.4: width*0.25,
                                   decoration: BoxDecoration(
                                       color: const Color(0xff4D869C),
                                       borderRadius:
                                           BorderRadius.circular(width * 0.075)),
                                   child: const Center(
                                     child: Text(
-                                      "Cancel",
+                                      "Add Record",
                                       style: TextStyle(
                                           color: Color(0xffCDE8E5),
                                           fontWeight: FontWeight.w800,
                                           fontSize: 22),
                                     ),
                                   ),
-                                )),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.05,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                if (_formKey.currentState!.validate()) {
-                                  expenseProvider.addToList(
-                                    ExpenseData(
-                                        title: textInTextField,
-                                        amount: numberInTextField,
-                                        date: selectedDateString,
-                                        whichTitle: abc,
-                                        uniqueKey: DateTime.now()),
-                                  );
-                                  AutoRouter.of(context).maybePop();
-                                }
-                              },
-                              child: Container(
-                                height: height * 0.05,
-                                width: width * 0.4,
-                                decoration: BoxDecoration(
-                                    color: const Color(0xff4D869C),
-                                    borderRadius:
-                                        BorderRadius.circular(width * 0.075)),
-                                child: const Center(
-                                  child: Text(
-                                    "Add Record",
-                                    style: TextStyle(
-                                        color: Color(0xffCDE8E5),
-                                        fontWeight: FontWeight.w800,
-                                        fontSize: 22),
-                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              width: width * 0.075,
-                            )
-                          ],
+                              SizedBox(
+                                width: width * 0.075,
+                              )
+                            ],
+                          ),
                         )
                       ],
                     ),

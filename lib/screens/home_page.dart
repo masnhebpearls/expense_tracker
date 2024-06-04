@@ -28,8 +28,9 @@ class MyHomePage extends StatelessWidget {
         return Scaffold(
           backgroundColor: const Color(0xffF4EEFF),
           floatingActionButton: FloatingActionButton(
-            onPressed: height > width
-                ? () {
+            onPressed:
+            // height > width ?
+                () {
                     showModalBottomSheet(
                         backgroundColor: Colors.transparent,
                         isScrollControlled: true,
@@ -37,8 +38,8 @@ class MyHomePage extends StatelessWidget {
                         builder: (BuildContext context) {
                           return const ExtendedModalSheet();
                         });
-                  }
-                : () {},
+                  },
+                // : () {},
             child: const Icon(Icons.add),
           ),
           appBar: AppBar(
