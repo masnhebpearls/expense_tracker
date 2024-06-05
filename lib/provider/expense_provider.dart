@@ -63,7 +63,7 @@ class ExpenseProvider extends ChangeNotifier {
           return finalAmountMisc;
         }
       default:
-        return 10.0;
+        return 1;
     }
   }
 

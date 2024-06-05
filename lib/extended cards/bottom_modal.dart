@@ -53,7 +53,7 @@ class _ExtendedModalSheetState extends State<ExtendedModalSheet> {
 
   String textInTextField = '';
   String numberInTextField = '0.0';
-  String dropDownValue = "General";
+  String dropDownValue = "Foods";
 
   final _formKey = GlobalKey<FormState>();
 
