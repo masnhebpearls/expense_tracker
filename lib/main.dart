@@ -1,3 +1,4 @@
+import 'package:expense_tracker/go%20router/go_router.dart';
 import 'package:expense_tracker/provider/expense_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +17,8 @@ void main() {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  final _appRouter = AppRouter();
+  final _appAutoRouter = AppRouter();
+  final _appGoRouter = AppGoRouter().router;
 
   // This widget is the root of your application.
   @override
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context)=> ExpenseProvider())
       ],
       child: MaterialApp.router(
-        routerConfig: _appRouter.config(),
+        routerConfig: _appGoRouter,
         debugShowCheckedModeBanner: false,
         title: 'Expense',
         theme: ThemeData(

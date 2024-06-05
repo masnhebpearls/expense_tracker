@@ -3,6 +3,7 @@ import 'package:expense_tracker/class/class.dart';
 import 'package:expense_tracker/provider/expense_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:date_format/date_format.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:string_validator/string_validator.dart';
 
@@ -355,7 +356,8 @@ class _ExtendedModalSheetState extends State<ExtendedModalSheet> {
                               const Spacer(),
                               InkWell(
                                   onTap: () {
-                                    AutoRouter.of(context).maybePop();
+                                    // AutoRouter.of(context).maybePop();
+                                    GoRouter.of(context).pop();
                                   },
                                   child: Container(
                                     height: height > width ? height * 0.05: height*0.1,
@@ -388,7 +390,8 @@ class _ExtendedModalSheetState extends State<ExtendedModalSheet> {
                                           whichTitle: abc,
                                           uniqueKey: DateTime.now()),
                                     );
-                                    AutoRouter.of(context).maybePop();
+                                    GoRouter.of(context).pop();
+                                    // AutoRouter.of(context).maybePop();
                                   }
                                 },
                                 child: Container(
