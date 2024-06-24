@@ -1,5 +1,7 @@
 import 'package:expense_tracker/provider/expense_provider.dart';
 
+import '../constants/tittle_enum.dart';
+
 class ExpenseData {
   final String title;
   final String amount;

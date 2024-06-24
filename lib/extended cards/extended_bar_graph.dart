@@ -2,6 +2,8 @@ import 'package:expense_tracker/provider/expense_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../constants/tittle_enum.dart';
+
 class ExtendedBarGraph extends StatefulWidget {
   final tittle category;
   final IconData icon;
@@ -51,7 +53,7 @@ class _ExtendedBarGraphState extends State<ExtendedBarGraph> {
                         )
                       : const SizedBox(),
                   Container(
-                    height: height > width ? height*0.2*(expenseProvider.getSum(widget.category) / expenseProvider.threshold): height*0.475*(expenseProvider.getSum(widget.category) / expenseProvider.threshold),
+                    height: height > width ? height*0.17*(expenseProvider.getSum(widget.category) / expenseProvider.threshold): height*0.475*(expenseProvider.getSum(widget.category) / expenseProvider.threshold),
                     width: MediaQuery.of(context).size.width * 0.175,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(

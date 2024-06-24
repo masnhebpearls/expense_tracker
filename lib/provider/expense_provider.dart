@@ -1,15 +1,13 @@
+import 'package:expense_tracker/database/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/class/expense_class.dart';
 
+import '../constants/tittle_enum.dart';
 
-enum tittle {
-  General,
-  Foods,
-  Fuels,
-  Misc
-}
+
 
 class ExpenseProvider extends ChangeNotifier {
+
   List<ExpenseData> listOfCard = [];
 
   double finalAmountGeneral = 0.0;
@@ -19,7 +17,40 @@ class ExpenseProvider extends ChangeNotifier {
 
   double threshold = 0;
 
-  void addToList(ExpenseData expense) {
+  Future<void> getData() async {
+    final variable  = await DatabaseHelper().getQuery();
+    listOfCard= variable;
+    finalAmountGeneral = 0.0;
+    finalAmountFoods = 0.0;
+    finalAmountFuels = 0.0;
+    finalAmountMisc = 0.0;
+
+    threshold = 0;
+    for (var x in listOfCard){
+      switch (x.whichTitle!) {
+        case tittle.General:
+          finalAmountGeneral += int.parse(x.amount);
+          break;
+        case tittle.Fuels:
+          finalAmountFuels += int.parse(x.amount);
+          break;
+        case tittle.Foods:
+          finalAmountFoods += int.parse(x.amount);
+          break;
+        case tittle.Misc:
+          finalAmountMisc += int.parse(x.amount);
+          break;
+        default:
+          threshold += 0;
+          break;
+      }
+    }
+    threshold = finalAmountMisc+finalAmountFoods+finalAmountFuels+finalAmountGeneral;
+  }
+
+  void addToList(ExpenseData expense) async {
+
+    await DatabaseHelper().insertExpense(expense);
     listOfCard.add(expense);
     threshold += int.parse(expense.amount);
     switch (expense.whichTitle!) {
@@ -65,7 +96,9 @@ class ExpenseProvider extends ChangeNotifier {
     }
   }
 
-  void deleteItem(DateTime id) {
+  void deleteItem(DateTime id) async {
+    await DatabaseHelper().deleteExpense(id);
+
     final ExpenseData expenseData =
         listOfCard.where((element) => element.uniqueKey == id).first;
     listOfCard.remove(expenseData);
@@ -87,7 +120,8 @@ class ExpenseProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void undoDelete(ExpenseData expenseData) {
+  void undoDelete(ExpenseData expenseData) async {
+    await DatabaseHelper().insertExpense(expenseData);
     listOfCard.add(expenseData);
     threshold += int.parse(expenseData.amount);
     switch (expenseData.whichTitle!) {

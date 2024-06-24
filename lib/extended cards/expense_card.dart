@@ -2,6 +2,8 @@ import 'package:expense_tracker/provider/expense_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../constants/tittle_enum.dart';
+
 class ExtendedExpenseCard extends StatefulWidget {
   final String title;
   final String amount;
