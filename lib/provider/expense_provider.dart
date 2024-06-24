@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:expense_tracker/class/class.dart';
+import 'package:expense_tracker/class/expense_class.dart';
 
 
 enum tittle {

@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:expense_tracker/class/class.dart';
+import 'package:expense_tracker/class/expense_class.dart';
 import 'package:expense_tracker/provider/expense_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:date_format/date_format.dart';
