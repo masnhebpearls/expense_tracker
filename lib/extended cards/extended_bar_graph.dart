@@ -15,10 +15,7 @@ class ExtendedBarGraph extends StatefulWidget {
 
 class _ExtendedBarGraphState extends State<ExtendedBarGraph> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,50 +34,55 @@ class _ExtendedBarGraphState extends State<ExtendedBarGraph> {
           child: SizedBox(
             width: height > width ? width * 0.175 : width * 0.075,
             height: height > width ? height * 0.275 : height * 0.7,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                expenseProvider.getSum(widget.category).toInt() != 0
-                    ? Center(
-                        child: Text(
-                          'Rs. ${expenseProvider.getSum(widget.category).toInt().toString()}',
-                          style: const TextStyle(
-                              fontSize: 16, color: Color(0xff424874)),
+            child: InkWell(
+              onTap: (){
+                print('Tapped');
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  expenseProvider.getSum(widget.category).toInt() != 0
+                      ? Center(
+                          child: Text(
+                            'Rs. ${expenseProvider.getSum(widget.category).toInt().toString()}',
+                            style: const TextStyle(
+                                fontSize: 16, color: Color(0xff424874)),
+                          ),
+                        )
+                      : const SizedBox(),
+                  Container(
+                    height: height > width ? height*0.2*(expenseProvider.getSum(widget.category) / expenseProvider.threshold): height*0.475*(expenseProvider.getSum(widget.category) / expenseProvider.threshold),
+                    width: MediaQuery.of(context).size.width * 0.175,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(height > width
+                              ? width *
+                                  0.035 *
+                                  (expenseProvider.getSum(widget.category) /
+                                      expenseProvider.threshold)
+                              : width *
+                                  0.025 *
+                                  (expenseProvider.getSum(widget.category) /
+                                      expenseProvider.threshold)),
+                          topRight: Radius.circular(width < height
+                              ? width *
+                                  0.035 *
+                                  (expenseProvider.getSum(widget.category) /
+                                      expenseProvider.threshold)
+                              : width *
+                                  0.025 *
+                                  (expenseProvider.getSum(widget.category) /
+                                      expenseProvider.threshold)),
                         ),
-                      )
-                    : const SizedBox(),
-                Container(
-                  height: height > width ? height*0.2*(expenseProvider.getSum(widget.category) / expenseProvider.threshold): height*0.475*(expenseProvider.getSum(widget.category) / expenseProvider.threshold),
-                  width: MediaQuery.of(context).size.width * 0.175,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(height > width
-                            ? width *
-                                0.035 *
-                                (expenseProvider.getSum(widget.category) /
-                                    expenseProvider.threshold)
-                            : width *
-                                0.025 *
-                                (expenseProvider.getSum(widget.category) /
-                                    expenseProvider.threshold)),
-                        topRight: Radius.circular(width < height
-                            ? width *
-                                0.035 *
-                                (expenseProvider.getSum(widget.category) /
-                                    expenseProvider.threshold)
-                            : width *
-                                0.025 *
-                                (expenseProvider.getSum(widget.category) /
-                                    expenseProvider.threshold)),
-                      ),
-                      color: const Color(0xff9572d4)),
-                ),
-                Icon(
-                  widget.icon,
-                  size: 32,
-                  color: const Color(0xff9572d4),
-                )
-              ],
+                        color: const Color(0xff9572d4)),
+                  ),
+                  Icon(
+                    widget.icon,
+                    size: 32,
+                    color: const Color(0xff9572d4),
+                  )
+                ],
+              ),
             ),
           ),
         );

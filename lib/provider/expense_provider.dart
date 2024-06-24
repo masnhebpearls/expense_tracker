@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/class/class.dart';
 
@@ -23,7 +22,6 @@ class ExpenseProvider extends ChangeNotifier {
   void addToList(ExpenseData expense) {
     listOfCard.add(expense);
     threshold += int.parse(expense.amount);
-    print('Threshold is $threshold');
     switch (expense.whichTitle!) {
       case tittle.General:
         finalAmountGeneral += int.parse(expense.amount);
@@ -75,12 +73,16 @@ class ExpenseProvider extends ChangeNotifier {
     switch (expenseData.whichTitle!) {
       case tittle.General:
         finalAmountGeneral -= int.parse(expenseData.amount);
+        break;
       case tittle.Fuels:
        finalAmountFuels -= int.parse(expenseData.amount);
+       break;
       case tittle.Foods:
         finalAmountFoods -= int.parse(expenseData.amount);
+        break;
       case tittle.Misc:
         finalAmountMisc -= int.parse(expenseData.amount);
+        break;
     }
     notifyListeners();
   }
@@ -91,12 +93,16 @@ class ExpenseProvider extends ChangeNotifier {
     switch (expenseData.whichTitle!) {
       case tittle.General:
         finalAmountGeneral += int.parse(expenseData.amount);
+        break;
       case tittle.Fuels:
         finalAmountFuels += int.parse(expenseData.amount);
+        break;
       case tittle.Foods:
         finalAmountFoods += int.parse(expenseData.amount);
+        break;
       case tittle.Misc:
         finalAmountMisc += int.parse(expenseData.amount);
+        break;
     }
     notifyListeners();
 
